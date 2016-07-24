@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>Hello Facebook</title>
+</head>
+<body>
+<h3>Hello, <span th:text="${facebookProfile.name}">Some User</span>!</h3>
+
+<h4>Here is your feed:</h4>
+
+<div th:each="post:${feed}">
+    <b th:text="${post.from.name}">from</b> wrote:
+    <p th:text="${post.message}">message text</p>
+    <img th:if="${post.picture}" th:src="${post.picture}"/>
+    <hr/>
+</div>
+
+<p>If you would like to disconnect your Facebook account click this button:</p>
+
+<form name="facebook" action="/connect/facebook" method="post">
+    <input type="hidden" name="_method" value="delete"/>
+    <input type="submit" name="submitBtn" value="Disconnect From Facebook"/>
+</form>
+
+<span th:text="${accessToken}" />
+
+</body>
+</html>
