@@ -34,6 +34,25 @@ public class SocialController {
         this.connectionRepository = connectionRepository;
     }
 
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String helloFacebook(Model model) {
+        Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
+
+        if (connection == null) {
+            return "redirect:/connect/facebook";
+        }
+
+        System.out.println("Access Token: " + connection.createData().getAccessToken());
+
+        model.addAttribute("facebookProfile", facebook.userOperations().getUserProfile());
+        model.addAttribute("accessToken", connection.createData().getAccessToken());
+
+        PagedList<Post> feed = facebook.feedOperations().getFeed();
+
+        model.addAttribute("feed", feed);
+        return "hello";
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public String connectFacebook(Model model) {
         Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
