@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Login page</title>
+    <title>Social Media Login</title>
 
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -39,18 +39,16 @@
             <td>
               <form action="/connect/facebook" method="POST">
                 <input type="hidden" name="scope" value="user_posts,public_profile,user_friends,email" />
-                <button type="submit"  class="ml btn btn-block btn-social btn-sm btn-facebook"><i class="fa fa-facebook"></i>Facebook</button>
+                <button type="submit" class="ml btn btn-block btn-social btn-sm btn-facebook"><i class="fa fa-facebook"></i>Facebook</button>
               </form>
             </td>
-            <td><a th:href="@{/auth/linkedin}" class="ml btn btn-block btn-social btn-sm btn-linkedin"><i class="fa fa-linkedin"></i>LinkedIn</a></td>
+            <td><a th:href="@{/auth/twitter}" class="ml btn btn-block btn-social btn-sm btn-twitter disabled"><i class="fa fa-twitter"></i>Twitter</a></td>
         </tr>
-        <tr>
-            <td><a th:href="@{/auth/twitter}" class="ml btn btn-block btn-social btn-sm btn-twitter"><i class="fa fa-twitter"></i>Twitter</a></td>
-        </tr>
-        <tr>
-            <td><a th:href="@{/auth/github}" class="ml btn btn-block btn-social btn-sm btn-github"><i class="fa fa-github"></i>Github</a></td>
-            <td><a th:href="@{/auth/google(scope='profile')}" class="ml btn btn-block btn-social btn-sm btn-google-plus"><i class="fa fa-google-plus"></i>Google+</a></td>
-        </tr>
+      <!--
+      <tr>
+        <td><a th:href="@{/auth/linkedin}" class="ml btn btn-block btn-social btn-sm btn-linkedin"><i class="fa fa-linkedin"></i>LinkedIn</a></td>
+      </tr>
+      -->
     </table>
 
     <div th:include="fragments/exception :: errorInfo"/>

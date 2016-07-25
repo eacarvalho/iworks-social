@@ -1,23 +1,71 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-    <title>Hello Facebook</title>
+    <title>Social Media Login</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-social.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
+
+    <style type="text/css">
+        <!--
+        .ml { width: 110px; color: white; text-decoration: none }
+        .ml:hover, a:focus { color: white; text-decoration: none }
+        -->
+    </style>
+
 </head>
+
 <body>
-<h3>Connected to Facebook</h3>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" />
 
-<p>
-    You are now connected to your Facebook account.<br/>
-    Click <a href="/">here</a> to see some entries from your Facebook feed.<br/>
-    Click <a href="/redirect">here</a> to redirect.<br/>
-    Click <a href="/hello">here</a> to hello.<br/>
-</p>
+<div th:replace="fragments/header :: userInfo"/>
 
-<p>If you would like to disconnect your Facebook account click this button:</p>
+<div class="container">
+    <h2>Connected to Facebook</h2>
 
-<form name="facebook" action="/connect/facebook" method="post">
-    <input type="hidden" name="_method" value="delete"/>
-    <input type="submit" name="submitBtn" value="Disconnect From Facebook"/>
-</form>
+    <table style="border-collapse: separate; border-spacing: 2px">
+        <tr>
+            <td>
+                <span>Click <a href="/">here</a> to see some entries from your Facebook feed</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>Click <a href="/redirect">here</a> to redirect</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>Click <a href="/hello">here</a> to hello</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p></p>
+                <form name="facebook" action="/connect/facebook" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit" name="submitBtn" class="ml btn btn-block btn-social btn-sm btn-facebook"><i class="fa fa-facebook"></i>Disconnect</button>
+                </form>
+            </td>
+        </tr>
+        <!--
+        <tr>
+          <td><a th:href="@{/auth/linkedin}" class="ml btn btn-block btn-social btn-sm btn-linkedin"><i class="fa fa-linkedin"></i>LinkedIn</a></td>
+        </tr>
+        -->
+    </table>
 
+    <div th:include="fragments/exception :: errorInfo"/>
+
+</div><!-- /.container -->
 </body>
 </html>
