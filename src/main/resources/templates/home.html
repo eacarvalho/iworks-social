@@ -30,17 +30,17 @@
 <div th:replace="fragments/header :: userInfo"/>
 
 <div class="container">
-    <h2>Connected to Facebook</h2>
+    <h3>Hello <span th:text="${facebookProfile.name}">Some User</span></h3>
 
     <table style="border-collapse: separate; border-spacing: 2px">
         <tr>
             <td>
-                <span>Clique <a href="/">aqui</a> para ver seu perfil do Facebook</span>
+                <span>Detalhes do token:</span>
             </td>
         </tr>
         <tr>
             <td>
-                <span>Clique <a href="/redirect">aqui</a> para direcionar para o UOL</span>
+                <span th:text="${#strings.substring(accessToken,0,100)}" />
             </td>
         </tr>
         <tr>

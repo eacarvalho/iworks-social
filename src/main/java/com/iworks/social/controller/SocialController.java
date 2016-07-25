@@ -2,12 +2,7 @@ package com.iworks.social.controller;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.connect.support.OAuth2Connection;
 import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.Page;
-import org.springframework.social.facebook.api.PagedList;
-import org.springframework.social.facebook.api.Post;
-import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,8 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.nio.channels.FileChannel;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -34,25 +27,6 @@ public class SocialController {
         this.connectionRepository = connectionRepository;
     }
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String helloFacebook(Model model) {
-        Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
-
-        if (connection == null) {
-            return "redirect:/connect/facebook";
-        }
-
-        System.out.println("Access Token: " + connection.createData().getAccessToken());
-
-        model.addAttribute("facebookProfile", facebook.userOperations().getUserProfile());
-        model.addAttribute("accessToken", connection.createData().getAccessToken());
-
-        PagedList<Post> feed = facebook.feedOperations().getFeed();
-
-        model.addAttribute("feed", feed);
-        return "hello";
-    }
-
     @RequestMapping(method = RequestMethod.GET)
     public String connectFacebook(Model model) {
         Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
@@ -65,11 +39,7 @@ public class SocialController {
 
         model.addAttribute("facebookProfile", facebook.userOperations().getUserProfile());
         model.addAttribute("accessToken", connection.createData().getAccessToken());
-
-        PagedList<Post> feed = facebook.feedOperations().getFeed();
-
-        model.addAttribute("feed", feed);
-        return "hello";
+        return "home";
     }
 
     @RequestMapping(value = "/redirect", method = RequestMethod.GET)
